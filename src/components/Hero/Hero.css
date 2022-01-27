@@ -1,0 +1,32 @@
+.hero-section {
+  margin-top: 5rem;
+}
+
+.hero-section .card {
+  width: 60rem;
+  max-width: 100%;
+  margin: 0 auto;
+  background: #343a40;
+  border: 0;
+  color: #fff;
+}
+
+.hero-section .card-title {
+  font-size: 2rem;
+  color: #f36e21;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.hero-section .card-text {
+  text-align: center;
+}
+
+.hero-section .card-img {
+  display: block;
+  width: 100%;
+  height: 30rem;
+  object-fit: cover;
+}

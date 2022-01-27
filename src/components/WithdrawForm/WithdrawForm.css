@@ -1,0 +1,86 @@
+.withdraw-section {
+  margin-top: 5rem;
+}
+
+.withdraw-section .card {
+  width: 40rem;
+  max-width: 100%;
+  background: #343a40;
+  color: #fff;
+  padding: 1.2rem;
+  margin: 0 auto;
+}
+
+.withdraw-section .card-title {
+  font-size: 2rem;
+  color: #f36e21;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.withdraw-section .total-balance {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.withdraw-section .balance-title,
+.withdraw-section .total-balance {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.withdraw-section .withdraw-form-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+}
+
+.withdraw-section .btn-primary {
+  display: block;
+  color: #fff;
+  background-color: #f36e21;
+  border-color: #f36e21;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 1.12rem;
+  text-transform: uppercase;
+}
+
+.withdraw-section .btn-primary:not(:disabled):not(.disabled).active,
+.withdraw-section .btn-primary:not(:disabled):not(.disabled):active {
+  color: #fff;
+  background-color: #f36e21;
+  border-color: #f36e21;
+  box-shadow: none;
+}
+
+.withdraw-section .btn-primary:hover,
+.withdraw-section .btn-primary:focus {
+  color: #fff;
+  background-color: #f36e21;
+  border-color: #f36e21;
+  box-shadow: none;
+}
+
+.withdraw-section .btn-primary.disabled,
+.withdraw-section .btn-primary:disabled {
+  color: #fff;
+  background-color: #f36e21;
+  border-color: #f36e21;
+}
+
+.form-control.error {
+  border: 2px solid #db1919;
+}
+
+.error-message {
+  color: #db1919;
+  padding: 0.2em;
+  position: absolute;
+  font-size: 0.8em;
+}

@@ -1,0 +1,38 @@
+.header .navbar {
+  padding: 0.8rem 1.5rem;
+}
+
+.header .navbar-brand {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.header .navbar-brand > a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.header .logo-color {
+  color: #f36e21;
+}
+
+.header .navbar-dark .navbar-nav .nav-link {
+  color: #fff;
+  margin-left: 1rem;
+  font-size: 1.1rem;
+}
+
+.header .navbar-dark .navbar-nav .nav-link.active {
+  color: #f36e21;
+}
+
+.header .navbar-dark .navbar-nav .nav-link:hover {
+  color: #f36e21;
+}
+
+@media (max-width: 768px) {
+  .header .navbar-dark .navbar-nav .nav-link {
+    margin-left: 0;
+  }
+}

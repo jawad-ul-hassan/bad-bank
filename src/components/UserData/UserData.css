@@ -1,0 +1,12 @@
+.user-data {
+  margin-top: 5rem;
+}
+
+.user-data h5 {
+  font-size: 2rem;
+  color: #f36e21;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 1.125rem;
+}

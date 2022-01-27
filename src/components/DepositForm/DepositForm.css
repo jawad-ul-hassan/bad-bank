@@ -1,0 +1,86 @@
+.deposit-section {
+  margin-top: 5rem;
+}
+
+.deposit-section .card {
+  width: 40rem;
+  max-width: 100%;
+  background: #343a40;
+  color: #fff;
+  padding: 1.2rem;
+  margin: 0 auto;
+}
+
+.deposit-section .card-title {
+  font-size: 2rem;
+  color: #f36e21;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.deposit-section .total-balance {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deposit-section .balance-title,
+.deposit-section .total-balance {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.deposit-section .deposit-form-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+}
+
+.deposit-section .btn-primary {
+  display: block;
+  color: #fff;
+  background-color: #f36e21;
+  border-color: #f36e21;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 1.12rem;
+  text-transform: uppercase;
+}
+
+.deposit-section .btn-primary:not(:disabled):not(.disabled).active,
+.deposit-section .btn-primary:not(:disabled):not(.disabled):active {
+  color: #fff;
+  background-color: #f36e21;
+  border-color: #f36e21;
+  box-shadow: none;
+}
+
+.deposit-section .btn-primary:hover,
+.deposit-section .btn-primary:focus {
+  color: #fff;
+  background-color: #f36e21;
+  border-color: #f36e21;
+  box-shadow: none;
+}
+
+.deposit-section .btn-primary.disabled,
+.deposit-section .btn-primary:disabled {
+  color: #fff;
+  background-color: #f36e21;
+  border-color: #f36e21;
+}
+
+.form-control.error {
+  border: 2px solid #db1919;
+}
+
+.error-message {
+  color: #db1919;
+  padding: 0.2em;
+  position: absolute;
+  font-size: 0.8em;
+}
