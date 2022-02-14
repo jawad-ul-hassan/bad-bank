@@ -1,7 +1,7 @@
 import React from 'react';
 import './Hero.css';
 import { Card, Container } from 'react-bootstrap';
-import banking from '../../assets/banking.jpg';
+import banking from '../../assets/badBank.png';
 
 const Hero = () => {
   return (
