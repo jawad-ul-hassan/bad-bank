@@ -3,31 +3,59 @@ import { Card, Form, Button, Container } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Swal from 'sweetalert2';
+import axios from 'axios';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-const DepositForm = ({ balance, setBalance }) => {
-  const initialValues = { deposit: '' };
+const DepositForm = () => {
+  const initialValues = { amount: '' };
+  const [balance, setBalance] = useState();
+
+  const userToken = useSelector(state => state.auth.user.token);
 
   const validationSchema = Yup.object().shape({
-    deposit: Yup.number()
+    amount: Yup.number()
       .typeError('*Deposit Amount must be a number')
       .required('*Deposit Amount is required')
       .positive('*Deposit Amount must be a positive number'),
   });
 
   const onSubmit = (values, { setSubmitting, resetForm }) => {
-    setBalance(parseFloat(balance) + parseFloat(values.deposit));
+    const config = {
+      headers: { Authorization: `JWT ${userToken}` },
+    };
+
+    const api = 'https://enigmatic-dawn-40394.herokuapp.com/api/user/deposit';
+    axios.post(api, values, config).then(res => {
+      setBalance(res.data.balance);
+    });
 
     setSubmitting(true);
-
     Swal.fire({
       title: 'Success',
       icon: 'success',
+      text: 'Deposit Successful',
       showConfirmButton: false,
+      timer: 1500,
     });
 
     resetForm();
-    setSubmitting(false);
   };
+
+  useEffect(() => {
+    const getBalance = async () => {
+      const config = {
+        headers: { Authorization: `JWT ${userToken}` },
+      };
+
+      const api = 'https://enigmatic-dawn-40394.herokuapp.com/api/user/deposit';
+      await axios.get(api, config).then(res => {
+        setBalance(res.data.balance);
+      });
+    };
+    getBalance();
+  }, [setBalance, userToken]);
 
   return (
     <section className="deposit-section">
@@ -37,7 +65,7 @@ const DepositForm = ({ balance, setBalance }) => {
           <div className="deposit-form-container">
             <div className="total-balance">
               <p className="balance-title">Balance</p>
-              <p className="total-balance">{parseFloat(balance).toFixed(2)}</p>
+              <p className="total-balance">{balance}</p>
             </div>
             <Formik
               initialValues={initialValues}
@@ -58,16 +86,16 @@ const DepositForm = ({ balance, setBalance }) => {
                     <Form.Label>Deposit Amount</Form.Label>
                     <Form.Control
                       type="text"
-                      name="deposit"
+                      name="amount"
                       className={
-                        touched.deposit && errors.deposit ? 'error' : null
+                        touched.amount && errors.amount ? 'error' : null
                       }
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      value={values.deposit}
+                      value={values.amount}
                     />
-                    {touched.deposit && errors.deposit ? (
-                      <div className="error-message">{errors.deposit}</div>
+                    {touched.amount && errors.amount ? (
+                      <div className="error-message">{errors.amount}</div>
                     ) : null}
                   </Form.Group>
 

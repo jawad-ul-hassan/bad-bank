@@ -4,39 +4,70 @@ import { Card, Form, Button, Container } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-const WithdrawForm = ({ balance, setBalance }) => {
-  const initialValues = { withdraw: '' };
+const WithdrawForm = () => {
+  const initialValues = { amount: '' };
+  const [balance, setBalance] = useState();
+
+  const userToken = useSelector(state => state.auth.user.token);
 
   const validationSchema = Yup.object().shape({
-    withdraw: Yup.number()
+    amount: Yup.number()
       .typeError('*Withdraw Amount must be a number')
       .required('*Withdraw Amount is required')
       .positive('*Withdraw Amount must be a positive number'),
   });
 
   const onSubmit = (values, { setSubmitting, resetForm }) => {
-    if (parseFloat(values.withdraw) > parseFloat(balance)) {
-      Swal.fire({
-        title: 'Error',
-        text: 'You do not have enough balance',
-        icon: 'error',
-        showConfirmButton: false,
-      });
-    } else {
-      setBalance(parseFloat(balance) - parseFloat(values.withdraw));
-      setSubmitting(true);
+    if (values.amount < balance) {
+      const config = {
+        headers: { Authorization: `JWT ${userToken}` },
+      };
 
+      const api =
+        'https://enigmatic-dawn-40394.herokuapp.com/api/user/withdraw';
+      axios.post(api, values, config).then(res => {
+        setBalance(res.data.balance);
+      });
+
+      setSubmitting(true);
       Swal.fire({
         title: 'Success',
         icon: 'success',
+        text: 'Withdraw Successful',
         showConfirmButton: false,
+        timer: 1500,
       });
-
-      resetForm();
-      setSubmitting(false);
+    } else {
+      Swal.fire({
+        title: 'Error',
+        icon: 'error',
+        text: 'Insufficient Balance',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
+    resetForm();
   };
+
+  useEffect(() => {
+    const getBalance = async () => {
+      const config = {
+        headers: { Authorization: `JWT ${userToken}` },
+      };
+
+      const api =
+        'https://enigmatic-dawn-40394.herokuapp.com/api/user/withdraw';
+      await axios.get(api, config).then(res => {
+        setBalance(res.data.balance);
+      });
+    };
+    getBalance();
+  }, [setBalance, userToken]);
 
   return (
     <section className="withdraw-section">
@@ -46,7 +77,7 @@ const WithdrawForm = ({ balance, setBalance }) => {
           <div className="withdraw-form-container">
             <div className="total-balance">
               <p className="balance-title">Balance</p>
-              <p className="total-balance">{parseFloat(balance).toFixed(2)}</p>
+              <p className="total-balance">{balance}</p>
             </div>
             <Formik
               initialValues={initialValues}
@@ -67,16 +98,16 @@ const WithdrawForm = ({ balance, setBalance }) => {
                     <Form.Label>Withdraw Amount</Form.Label>
                     <Form.Control
                       type="text"
-                      name="withdraw"
+                      name="amount"
                       className={
-                        touched.withdraw && errors.withdraw ? 'error' : null
+                        touched.amount && errors.amount ? 'error' : null
                       }
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      value={values.withdraw}
+                      value={values.amount}
                     />
-                    {touched.withdraw && errors.withdraw ? (
-                      <div className="error-message">{errors.withdraw}</div>
+                    {touched.amount && errors.amount ? (
+                      <div className="error-message">{errors.amount}</div>
                     ) : null}
                   </Form.Group>
 

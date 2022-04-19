@@ -1,38 +1,25 @@
 import Home from './pages/Home/Home';
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CreateAccount from './pages/CreateAccount/CreateAccount';
 import Deposit from './pages/Deposit/Deposit';
 import Withdraw from './pages/Withdraw/Withdraw';
-import AllData from './pages/AllData/AllData';
-import { useState } from 'react';
+import Login from './pages/Login/Login';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [userData, setUserData] = useState([]);
-  const [balance, setBalance] = useState(0);
-
-  const userDataHandler = user => {
-    setUserData([...userData, user]);
-  };
-
   return (
     <>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/create-account">
-          <CreateAccount userDataHandler={userDataHandler} />
-        </Route>
-        <Route path="/deposit">
-          <Deposit balance={balance} setBalance={setBalance} />
-        </Route>
-        <Route path="/withdraw">
-          <Withdraw balance={balance} setBalance={setBalance} />
-        </Route>
-        <Route path="/all-data">
-          <AllData userData={userData} />
-        </Route>
-      </Switch>
+      <Router>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/create-account" element={<CreateAccount />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/deposit" element={<Deposit />} />
+          <Route path="/withdraw" element={<Withdraw />} />
+        </Routes>
+      </Router>
+      <ToastContainer />
     </>
   );
 }

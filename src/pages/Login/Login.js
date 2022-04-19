@@ -1,14 +1,14 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
-import UserData from '../../components/UserData/UserData';
+import LoginForm from '../../components/LoginForm/LoginForm';
 
-const AllData = () => {
+const Login = () => {
   return (
     <>
       <Header />
-      <UserData />
+      <LoginForm />
     </>
   );
 };
 
-export default AllData;
+export default Login;

@@ -1,17 +1,16 @@
 import React from 'react';
-import './AccountForm.css';
 import { Card, Form, Button, Container } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Swal from 'sweetalert2';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { register, reset } from '../../features/auth/authSlice';
+import { login, reset } from '../../features/auth/authSlice';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 import Loader from '../Loader';
 
-const AccountForm = () => {
+const LoginForm = () => {
+  const initialValues = { email: '', password: '' };
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,18 +18,13 @@ const AccountForm = () => {
     state => state.auth
   );
 
-  const initialValues = { userName: '', email: '', password: '' };
-
   const validationSchema = Yup.object().shape({
-    userName: Yup.string().required('*Name is required'),
     email: Yup.string().required('*Email is required'),
-    password: Yup.string()
-      .required('*Password is required')
-      .min(8, '*Password must have at least 8 characters'),
+    password: Yup.string().required('*Password is required'),
   });
 
   const onSubmit = (values, { setSubmitting, resetForm }) => {
-    dispatch(register(values));
+    dispatch(login(values));
     setSubmitting(true);
   };
 
@@ -39,12 +33,6 @@ const AccountForm = () => {
       toast.error(message);
     }
     if (isSuccess || user) {
-      Swal.fire({
-        title: 'Success',
-        text: 'You have successfully registered',
-        icon: 'success',
-        confirmButtonText: 'OK',
-      });
       navigate('/');
     }
     dispatch(reset());
@@ -58,7 +46,7 @@ const AccountForm = () => {
     <section className="create-account">
       <Container>
         <Card>
-          <Card.Title>Create Account</Card.Title>
+          <Card.Title>Login</Card.Title>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -71,27 +59,10 @@ const AccountForm = () => {
               handleChange,
               handleBlur,
               handleSubmit,
+              isSubmitting,
               isValid,
             }) => (
               <Form onSubmit={handleSubmit} className="create-form">
-                <Form.Group controlId="formBasictext" className="mb-4">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    name="userName"
-                    type="text"
-                    placeholder="John Doe"
-                    className={
-                      touched.userName && errors.userName ? 'error' : null
-                    }
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.userName}
-                  />
-                  {touched.userName && errors.userName ? (
-                    <div className="error-message">{errors.userName}</div>
-                  ) : null}
-                </Form.Group>
-
                 <Form.Group controlId="formBasicEmail" className="mb-4">
                   <Form.Label>Email ID</Form.Label>
                   <Form.Control
@@ -125,7 +96,7 @@ const AccountForm = () => {
                   ) : null}
                 </Form.Group>
                 <Button type="submit" disabled={!isValid}>
-                  Create Account
+                  Login
                 </Button>
               </Form>
             )}
@@ -136,4 +107,4 @@ const AccountForm = () => {
   );
 };
 
-export default AccountForm;
+export default LoginForm;

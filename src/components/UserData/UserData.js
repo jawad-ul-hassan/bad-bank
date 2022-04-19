@@ -2,8 +2,8 @@ import './UserData.css';
 import { Container, Table } from 'react-bootstrap';
 import { Alert } from 'react-bootstrap';
 
-const UserData = userData => {
-  const tableRows = userData.userData.map((info, ind) => {
+const UserData = () => {
+  const tableRows = [].map((info, ind) => {
     return (
       <tr key={ind}>
         <td>{info.name}</td>
@@ -16,7 +16,7 @@ const UserData = userData => {
     <section className="user-data">
       <h5>All Data</h5>
       <Container>
-        {userData.userData.length > 0 ? (
+        {[].length > 0 ? (
           <Table striped bordered hover variant="dark" responsive>
             <thead>
               <tr>
