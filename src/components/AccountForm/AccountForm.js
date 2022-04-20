@@ -43,9 +43,13 @@ const AccountForm = () => {
         title: 'Success',
         text: 'You have successfully registered',
         icon: 'success',
-        confirmButtonText: 'OK',
+        showConfirmButton: false,
+        timer: 2000,
       });
-      navigate('/');
+
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
     }
     dispatch(reset());
   }, [isError, isSuccess, user, message, navigate, dispatch]);

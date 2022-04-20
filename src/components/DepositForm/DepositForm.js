@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 
 const DepositForm = () => {
   const initialValues = { amount: '' };
-  const [balance, setBalance] = useState();
+  const [balance, setBalance] = useState(0);
 
   const userToken = useSelector(state => state.auth.user.token);
 
@@ -65,7 +65,7 @@ const DepositForm = () => {
           <div className="deposit-form-container">
             <div className="total-balance">
               <p className="balance-title">Balance</p>
-              <p className="total-balance">{balance}</p>
+              <p className="total-balance">{`$ ${balance}`}</p>
             </div>
             <Formik
               initialValues={initialValues}

@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 
 const WithdrawForm = () => {
   const initialValues = { amount: '' };
-  const [balance, setBalance] = useState();
+  const [balance, setBalance] = useState(0);
 
   const userToken = useSelector(state => state.auth.user.token);
 
@@ -77,7 +77,7 @@ const WithdrawForm = () => {
           <div className="withdraw-form-container">
             <div className="total-balance">
               <p className="balance-title">Balance</p>
-              <p className="total-balance">{balance}</p>
+              <p className="total-balance">{`$ ${balance}`}</p>
             </div>
             <Formik
               initialValues={initialValues}
